@@ -12,16 +12,16 @@ Home page slider to come, only one image for now.
 
 
 Homepage.
-![my image](/img/screenshots/homepage.png?raw=true "Homepage")
+![my image](/src/img/screenshots/homepage.png?raw=true "Homepage")
 
 Players
-![my image](/img/scrnshots/players.png?raw=true "Players")
+![my image](/src/img/scrnshots/players.png?raw=true "Players")
 
 Player Profile
-![my image](/img/scrnshots/player-profile.png?raw=true "Player Profile")
+![my image](/src/img/scrnshots/player-profile.png?raw=true "Player Profile")
 
 Conference standing
-![my image](/img/scrnshots/conference.png?raw=true "Conference standings")
+![my image](/src/img/scrnshots/conference.png?raw=true "Conference standings")
 
 Divisions
-![my image](/img/scrnshots/divisions.png?raw=true "Divisions")
+![my image](/src/img/scrnshots/divisions.png?raw=true "Divisions")
