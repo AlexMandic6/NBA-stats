@@ -15,13 +15,13 @@ Homepage.
 ![my image](/src/img/screenshots/homepage.png?raw=true "Homepage")
 
 Players
-![my image](/src/img/scrnshots/players.png?raw=true "Players")
+![my image](/src/img/screenshots/players.png?raw=true "Players")
 
 Player Profile
-![my image](/src/img/scrnshots/player-profile.png?raw=true "Player Profile")
+![my image](/src/img/screenshots/player-profile.png?raw=true "Player Profile")
 
 Conference standing
-![my image](/src/img/scrnshots/conference.png?raw=true "Conference standings")
+![my image](/src/img/screenshots/conference.png?raw=true "Conference standings")
 
 Divisions
-![my image](/src/img/scrnshots/divisions.png?raw=true "Divisions")
+![my image](/src/img/screenshots/divisions.png?raw=true "Divisions")
