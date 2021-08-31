@@ -1,7 +1,7 @@
 {
   "name": "stats",
   "version": "1.0.0",
-  "description": "App tracking NBA stats",
+  "description": "NBA statistics App",
   "main": "index.js",
   "author": "Aleksandar Mandic",
   "license": "MIT",
