@@ -1,0 +1,206 @@
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mixin;
+
+.profile {
+    position: relative;
+    
+    &-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__team-logo {
+        width: 50%;
+        position: absolute;
+        transform: translateY(-35%);
+        opacity: 0.05;
+    }
+    &__team-image {
+        
+        & img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+    &__player-wrapper {
+        position: relative;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+
+    &__player {
+        padding: 0 8rem;
+        display: flex;
+        @include mixin.respond(tablet) {
+            padding: 0 4rem;
+        }
+
+
+        &-image {
+            display: block;
+            margin: 9.6rem auto 0;
+            width: 83.5%;
+            @include mixin.respond(phone-landscape) {
+                margin-top: 6.4rem;
+            }
+        }
+
+            &-image-container {
+                width: 33.333333%;
+                @include mixin.respond(phone-landscape) {
+                    width: 50%;
+                }
+        }
+        &-logo {
+            width: 12.8rem;
+            margin-top: 2rem;
+            position: absolute;
+            @include mixin.respond(tablet) {
+                width: 9.6rem;
+            }
+            @include mixin.respond(phone-landscape) {
+                width: 8rem;
+            }
+            @include mixin.respond(phone) {
+                width: 6.4rem;
+            }
+        }
+
+        &-info {
+            width: 66.666667;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &-text {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: .8rem;
+            color: var.$color-white;
+
+            &-team {
+                font-size: 1.6rem;
+                font-weight: 400;
+                @include mixin.respond(phone-landscape) {
+                    font-size: 1.2rem;    
+                }
+            }
+            &-name {
+                font-size: 6rem;
+                font-weight: 700;
+                line-height: 1.25;
+
+                @include mixin.respond(tablet) {
+                    font-size: 3.6rem;
+                }
+                @include mixin.respond(phone-landscape) {
+                    font-size: 2.4rem;    
+                }
+            }
+        }
+    }
+}
+
+.stats {
+    padding: 0 8rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    max-width: 1440px;
+
+    @include mixin.respond(tablet) {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    &__game {
+        display: flex;
+        justify-content: space-around;
+        min-width: 40%;
+        @include mixin.respond(tablet) {
+            padding: 1.2rem 0;
+            border-top: 1px solid rgba($color: #ffffff, $alpha: .6);
+            border-bottom: 1px solid rgba($color: #ffffff, $alpha: .6);
+            justify-content: center;
+            width: 100%;
+        }
+
+        &-stat {
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            color: var.$color-white;
+            text-align: center;
+            text-transform: uppercase;
+            &-header {
+                font-size: 1.6rem;
+                @include mixin.respond(tablet) {
+                    font-size: 1.4rem;
+                }
+            }
+            &-row {
+                font-size: 2.8rem;
+                font-weight: 700;
+                @include mixin.respond(tablet) {
+                    font-size: 2.4rem;
+                }
+            }
+        }
+    }
+    &__bio {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+
+        @include mixin.respond(tablet) {
+            width: 100%;
+        }
+
+        &-summary {
+            display: flex;
+            @include mixin.respond(tablet) {
+                border-bottom: 1px solid rgba($color: #ffffff, $alpha: .6);
+            }
+            @include mixin.respond(phone) {
+                flex-wrap: wrap;
+            }
+
+            
+        }
+        &-playerInfo {
+            color: var.$color-white;
+            text-align: center;
+            width: 25%;
+            padding: 1.2rem 0;
+            @include mixin.respond(tablet) {
+                border-left: 1px solid rgba($color: #ffffff, $alpha: .6);
+                border-right: 1px solid rgba($color: #ffffff, $alpha: .6);
+            }
+            @include mixin.respond(phone) {
+                width: 100%;
+                display: block;
+                border-bottom: 1px solid rgba($color: #ffffff, $alpha: .6);
+                }
+
+            &-header {
+                text-transform: uppercase;
+                font-size: 1.2rem;
+                line-height: 1.25;
+            }
+            &-row {
+                font-size: 1.6rem;
+                line-height: 1.25;
+            }
+        }
+    }
+}
+
+.empty-space {
+    width: 100%;
+    height: 200px;
+
+    @include mixin.respond(phone) {
+        height: 100px;        
+    }
+}

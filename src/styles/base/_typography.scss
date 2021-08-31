@@ -1,0 +1,6 @@
+@use '../abstracts/variables';
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: variables.$default-font-size;
+}

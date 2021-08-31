@@ -1,0 +1,36 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins' as mixin;
+
+// Basic styles for showing data on page
+.data {
+    max-width: 1280px;
+    margin: 0 auto 2.4rem;
+    border-radius: 4px;
+    box-shadow: 0 0 10px 0 hsl(0deg 0% 82% / 50%);
+
+    &-wrapper {
+        padding: 2.8rem;
+        margin: 0 auto;
+
+        @include mixin.respond(phone-landscape) {
+            padding: 0;    
+        }
+    }
+    &-container {
+        padding: 2rem;
+
+        @include mixin.respond(phone-landscape) {
+            padding: 1.6rem;
+        }
+    }
+
+    &__text {
+        padding-bottom: 1.2rem;
+        margin-bottom: 1.2rem;
+        border-bottom: 1px solid rgba(231, 231,231, 1);
+    }
+
+    &__heading {
+        font-size: variables.$default-font-size;
+    }
+}

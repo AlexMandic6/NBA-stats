@@ -1,0 +1,69 @@
+@use '../layout/data-layout';
+@use '../abstracts/variables';
+@use '../abstracts/mixins' as mixin;
+
+.teams {
+   
+    &-divisions__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &-divisions {
+        //test
+        width: 33.333333%;
+        margin: 1.2rem 0 3rem;
+        @include mixin.respond(tablet) {
+            width: 50%;
+        }
+        @include mixin.respond(phone) {
+            width: 100%;
+        }
+        
+        &:nth-child(1) { order: 3;}
+        &:nth-child(2) { order: 1;}
+        &:nth-child(3) { order: 2;}
+        &:nth-child(4) { order: 6;}
+        &:nth-child(5) { order: 4;}
+        &:nth-child(6) { order: 5;}
+
+        &__heading {
+            text-transform: uppercase;
+            font-size: 1.4rem;
+        }
+    }
+
+    &-division {
+        padding: 8px;
+        display: flex;
+        align-items: center;
+
+        &__sub-info {
+            display: flex;
+
+            &-link {
+                text-decoration: none;
+                margin-right: 8px;
+                color: rgb(2, 104, 214);
+                font-size: 1.4rem;
+            }
+        }
+
+        &__team {
+            text-decoration: none;
+            color: #000;
+            font-size: 1.8rem;
+        }
+
+        &__logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 1.6rem;
+        }
+
+        &__img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

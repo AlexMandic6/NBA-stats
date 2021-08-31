@@ -1,0 +1,188 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins' as mixin;
+
+
+footer {
+    background-color: #051c2d;
+    width: 100%;
+}
+
+.footer {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 3.2rem;
+    @include mixin.respond(phone-landscape) {
+        padding: 0;     
+    }
+
+    &__links {
+        display: flex;
+        justify-content: space-between;
+        @include mixin.respond(phone-landscape) {
+            flex-direction: column;     
+        }
+    }
+
+    &__col {
+        @include mixin.respond(phone-landscape) {
+            border-bottom: 1px solid rgba($color: #ffffff, $alpha: .6);    
+        }
+
+        &:last-child {
+            margin-right: 2.4rem;
+            margin-left: 20%;
+
+            @include mixin.respond(phone-landscape) {
+                margin: 0;    
+            }
+        }
+    }
+    
+    &__title {
+        font-size: 1rem;
+        padding: 1.6rem 1.2rem;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        color: variables.$color-white;
+        text-transform: uppercase;
+        @include mixin.respond(phone-landscape) {
+            padding: 1.6rem 3.2rem;
+            display: flex; 
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0 1.2rem;
+        @include mixin.respond(phone-landscape) {
+            display: none;
+        }
+    }
+
+    &__item {
+        line-height: 3.2rem;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: variables.$color-white;
+        font-size: 1.4rem;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__rule {
+        margin: 3.2rem 0;
+        opacity: .25;
+        border-color: #f6f6f6;
+        border-top-width: 1px;
+        border-bottom: none;
+        @include mixin.respond(phone-landscape) {
+            display: none;     
+        }
+    }
+
+    // FOOTER SOCIAL
+    &__social {
+        display: flex;
+        @include mixin.respond(phone-landscape) {
+            flex-direction: column-reverse;     
+        }
+    }
+
+    &__legal {
+        flex: 1 1;
+        padding: 0 1.6rem;
+
+        &-copyright {
+            margin-bottom: 8px;
+            color: variables.$color-white;
+            font-size: 1rem;
+            @include mixin.respond(phone-landscape) {
+                font-size: 1.2rem;     
+            }
+        }
+
+        &-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        &-item {
+            display: flex;
+            align-items: center;
+
+            &:not(:last-child)::after {
+                content: "|";
+                font-size: 1rem;
+                padding: 0 8px;
+                color: variables.$color-white;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        &-link {
+            text-decoration: none;
+            color: variables.$color-white;
+            font-size: 1rem;
+            @include mixin.respond(phone-landscape) {
+                font-size: 1.2rem;    
+            }
+        }
+
+        &-paragraph {
+            margin-top: 8px;
+            color: variables.$color-white;
+            font-size: 1rem;
+            @include mixin.respond(phone-landscape) {
+                font-size: 1.2rem;    
+            }
+        }
+
+        &-logo {
+            margin-top: 8px;
+            color: variables.$color-white;
+            font-size: 1rem;
+            @include mixin.respond(phone-landscape) {
+                font-size: 1.2rem;
+            }
+        }
+
+        &-img {
+            margin-top: 8px;
+            width: 9.6rem;
+            display: block;
+        }
+    }
+
+    &__icons {
+        display: flex;
+        @include mixin.respond(phone-landscape) {
+            padding: 2.4rem 1.6rem;     
+        }
+
+        &-link:not(:last-child) {
+            margin-right: 2rem;
+        }
+    }
+
+    &__icon {
+        height: 22px;
+        width: 22px;
+        fill: white;
+        @include mixin.respond(phone-landscape) {
+            height: 28px;
+            width: 28px;    
+        }
+    }
+}

@@ -1,0 +1,82 @@
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mixin;
+
+
+.header {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    height: 5.5rem;
+    margin: 0 auto;
+    padding: 0 3.2rem;
+    display: flex;
+    align-items: center;
+    z-index: 50;
+    background-color: #051c2d;
+    overflow-x: hidden;
+
+    &__logo {
+      margin-right: 1.6rem;
+
+      @include mixin.respond(phone-landscape) {
+        margin-right: 0.4rem;
+    }
+    }
+}
+
+.header-wrapper {
+    margin-bottom: 10rem;
+    width: 100%;
+    background-color: #051c2d;
+}
+
+.nav {
+    height: 100%;
+    width: 100%;
+    margin-left: 3rem;
+
+    @include mixin.respond(tablet) {
+        margin-left: 1.5rem;
+    }
+    @include mixin.respond(phone-landscape) {
+        margin-left: 0;
+    }
+    
+    
+    &:hover &__link {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    
+    &__list {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        flex-wrap: wrap;
+    }
+
+    &__item {
+        line-height: 5.5rem;
+        height: 100%;
+        padding: 0 1.5rem;
+        @include mixin.respond(tablet) {
+            padding: 0 1rem;
+        }
+
+        &:hover .nav__link {
+            color: rgba(255, 255, 255, 1);
+            transform: translateY(-1px);
+        }
+    }
+
+    &__link {
+        font-size: var.$default-font-size;
+        font-weight: 400;
+        text-decoration: none;
+        color: var.$color-white;
+        padding: 0 8px;
+        display: block;
+        height: 100%;
+        transition: transform .3s ease;
+    }
+}

@@ -1,3 +1,11 @@
-body {
-  color: blue;
-}
+@use './base/base';
+@use './base/typography';
+
+@use './layout/header';
+@use './layout/home';
+@use './layout/teams';
+@use './layout/footer';
+@use './layout/player-profile';
+@use './layout/players';
+@use './layout/standings';
+

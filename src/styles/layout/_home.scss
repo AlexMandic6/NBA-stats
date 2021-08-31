@@ -1,0 +1,163 @@
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mixin;
+@use '../base/utilities' as utilities;
+@use '../components/button';
+
+.header-wrapper {
+    position: relative;
+    z-index: 20;
+}
+
+.hero-wrapper {
+    width: 100%;
+    background-color: var.$color-black;
+}
+.hero {
+    position: relative;
+    height: 680px;
+    max-width: 1440px;
+    margin: 0 auto;
+    overflow: hidden;
+    @include mixin.respond(phone-landscape) {
+        height: 550px;
+    }
+
+    &__image {
+        position: absolute;
+        top: 0;
+        right: 5rem;
+        object-fit: cover;
+        background-repeat: no-repeat;
+        background-size: cover;
+        animation: zoomInOut 8s ease-in-out 0s infinite alternate forwards;
+        width: 70%;
+        height: 80%;
+
+        @include mixin.respond(tablet) {
+            width: 60%;
+            height: 70%;
+        }
+        @include mixin.respond(phone-landscape) {
+            width: 100%;
+            height: 90%;
+        }
+    }
+    
+    @keyframes zoomInOut {
+        0% {transform: scale(1);}
+        100% {transform: scale(1.2);}
+    }
+    
+    &__text {
+        width: 42%;
+        padding: 8rem 2.4rem 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 20;
+        color: var.$color-white;
+        
+        @include mixin.respond(tablet) {
+            width: 60%;
+        }
+        @include mixin.respond(phone-landscape) {
+            top: 75%;
+            width: 100%;
+            padding: 0 1.6rem;
+        }
+    }
+    &__heading {
+        font-size: 3.6rem;
+        font-weight: 700;
+        line-height: 1.25;
+        margin-bottom: 2rem;
+        @include mixin.respond(phone-landscape) {
+            font-size: 2.4rem;
+        }
+    }
+    &__paragraph {
+        font-size: 1.4rem;
+        font-weight: 400;
+        margin-bottom: 2rem;
+
+        @include mixin.respond(phone-landscape) {
+            display: none;
+        }
+    }
+
+    &__related {
+        @include mixin.respond(phone-landscape) {
+            display: none;
+        }
+
+        &-heading {
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.25;
+            margin-bottom: .8rem;
+        }
+        &-list {
+            list-style: none;
+            margin-bottom: 4px;
+        }
+        &-link {
+            text-decoration: none;
+            color: var.$color-white;
+            line-height: 1.5;
+        }
+    }
+}
+
+.news {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    &-wrapper {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        z-index: 20;
+        padding: 0 8px;
+        margin-bottom: 1.2rem;
+    }
+
+    &__btn {
+        padding: 0 2rem .8rem;
+        background-color: transparent;
+        color: #545454;
+        border: none;
+        outline: none;
+        width: 100%;
+        cursor: pointer;
+        transition: all .2s ease-in;
+        @include mixin.respond(phone-landscape) {
+            display: none;
+        }
+
+        & span {
+            display: block;
+            margin-bottom: 1.2rem;
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background-color: #545454;
+            transition: all .2s ease-in;
+        }
+        &-heading {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            text-align: left;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+        }
+        &-paragraph {
+            font-size: 1.6rem;
+            text-align: left;
+            font-weight: 700;
+        }
+    }
+
+}
+

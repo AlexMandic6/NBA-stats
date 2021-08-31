@@ -1,30 +1,37 @@
 {
-  "name": "project-webpack-bolierplate",
+  "name": "stats",
   "version": "1.0.0",
-  "description": "Project boilerplate with webpack, babel and scss setup",
+  "description": "App tracking NBA stats",
   "main": "index.js",
-  "author": "Mazaher Muraj",
+  "author": "Aleksandar Mandic",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --history-api-fallback --inline --progress"
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-cli serve --mode development"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
+    "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/preset-env": "^7.6.0",
-    "babel-core": "^6.26.3",
+    "@webpack-cli/serve": "^1.5.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-module-resolver": "^3.2.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-polyfill": "^6.26.0",
-    "css-loader": "^3.2.0",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^8.0.0",
-    "style-loader": "^1.0.0",
-    "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.8",
-    "webpack-dashboard": "^3.2.0",
-    "webpack-dev-server": "^3.8.0"
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^5.2.6",
+    "html-webpack-plugin": "^5.3.2",
+    "mini-css-extract-plugin": "^2.0.0",
+    "postcss": "^8.3.5",
+    "postcss-loader": "^6.1.1",
+    "postcss-preset-env": "^6.7.0",
+    "sass": "^1.35.1",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.0.0",
+    "webpack": "^5.42.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
   }
 }

@@ -1,0 +1,33 @@
+@use '../abstracts/mixins' as mixin;
+
+.zero-margin {
+    margin: 0;
+}
+
+.shadow-layer {
+background-image: linear-gradient(90deg,#000 30%,transparent 52%),
+linear-gradient(0deg,#000 20%,transparent 35%),
+linear-gradient(270deg,#000 3%,transparent 25%);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+
+    @include mixin.respond(phone-landscape) {
+        background-image: linear-gradient(
+            0deg
+            , #000 0%, transparent 52%), linear-gradient(
+            0deg
+            , #000 20%, transparent 35%), linear-gradient(
+            270deg
+            , #000 0%, transparent 20%);
+    }
+}
+
+.news__btn--selected {
+    color: white !important;
+    & span {
+        background-color: white !important;
+    }
+}
