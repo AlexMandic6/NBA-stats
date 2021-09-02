@@ -34,7 +34,7 @@
     width: 100%;
     margin-left: 3rem;
     position: relative;
-    // transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
 
     @include mixin.respond(tablet) {
         margin-left: 1.5rem;
@@ -152,8 +152,6 @@
         position: absolute;
         top: 50%;
         left: 0;
-        transition: all 0.2s ease-in;
-
         &::before,
         &::after {
             content: "";
@@ -163,6 +161,8 @@
             height: 3px;
             background-color: var.$color-white;
             top: -7px;
+            transition: all 0.2s ease-in;
+
         }
         &::after {
             top: 7px;
@@ -177,6 +177,17 @@
     height: 100vh;
     background-color: #051c2d;
     position: fixed;
+    }
+}
+.header-active .hamburger__bar {
+    visibility: hidden;
+    &::before {
+        visibility: visible;
+        transform: translateY(7px) rotate(45deg);
+    }
+    &::after {
+        visibility: visible;
+        transform: translateY(-7px) rotate(-45deg);
     }
 }
 .header-active {
