@@ -108,13 +108,13 @@ export const renderResults = (players, page = 1, resPerPage = 50) => {
     renderButtons(page, players.length, resPerPage,);
 }
 
-const changePageBtns = async (button) => {
+const changePageBtns = button => {
     const parentBtn = elements.pageBtn;
     const pageToGo = parseInt(parentBtn.dataset.goto);
     
     if(button.classList.contains('btn-next')) {
         fetchPlayers().then(res => {
-                clearResults();
+            clearResults();
                 renderResults(res, pageToGo + 1);
             });
         parentBtn.dataset.goto ++;
@@ -154,7 +154,6 @@ elements.pageBtn.addEventListener('click', e => {
 
 elements.playerSearchBar.addEventListener('keyup', e => {
     const searchString = e.target.value.toLowerCase();
-
     if(searchString.length > 0) {
         const fetchedPlayers = async () => {
             const players = await fetchPlayers();
