@@ -1,9 +1,12 @@
 import '../styles/main.scss';
 import './fetchPlayers';
+import { elements } from "./base";
 import { fetchPlayers } from './fetchPlayers';
 import { fetchTeams } from './fetchTeams';
 import { fetchTeamColor } from './fetchTeamColors';
+import { mobileMenu } from './mobileMenu';
 
+elements.hamburgerMenu.addEventListener('click', mobileMenu);
 
 export const controlPlayer = async () => {
     const id = window.location.hash.replace('#', '');

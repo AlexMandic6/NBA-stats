@@ -1,6 +1,9 @@
 import '../styles/main.scss';
 import { fetchTeams } from "./fetchTeams";
 import { elements } from "./base";
+import { mobileMenu } from './mobileMenu';
+
+elements.hamburgerMenu.addEventListener('click', mobileMenu);
 
 const sortDivisions = async () => {
     const divisions = {};

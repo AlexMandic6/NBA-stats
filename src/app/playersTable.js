@@ -2,6 +2,10 @@ import '../styles/main.scss';
 import { fetchPlayers } from './fetchPlayers';
 import { fetchTeamColor } from './fetchTeamColors';
 import { elements } from './base';
+import { mobileMenu } from './mobileMenu';
+
+elements.hamburgerMenu.addEventListener('click', mobileMenu);
+
 
 const clearResults = () => {
     elements.playerTable.innerHTML = '';
@@ -160,7 +164,6 @@ elements.playerSearchBar.addEventListener('keyup', e => {
                 ;
             });
             clearResults();
-            console.log(filteredPlayers, searchString.length)
             filteredPlayers.forEach(player => renderPlayer(player));
             showNumberOfPlayers(filteredPlayers);
             clearDropdown();

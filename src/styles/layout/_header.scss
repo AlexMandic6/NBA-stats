@@ -13,7 +13,6 @@
     align-items: center;
     z-index: 50;
     background-color: #051c2d;
-    overflow-x: hidden;
 
     &__logo {
       margin-right: 1.6rem;
@@ -34,12 +33,18 @@
     height: 100%;
     width: 100%;
     margin-left: 3rem;
+    position: relative;
+    // transition: all .3s ease-in-out;
 
     @include mixin.respond(tablet) {
         margin-left: 1.5rem;
     }
     @include mixin.respond(phone-landscape) {
         margin-left: 0;
+        position: absolute;
+        top: 55px;
+        left: -100%;
+        
     }
     
     
@@ -52,20 +57,49 @@
         display: flex;
         align-items: center;
         height: 100%;
-        flex-wrap: wrap;
+
+        @include mixin.respond(phone-landscape) {
+            background-color: #051c2d;
+            flex-direction: column;
+            position: absolute;
+            z-index: 999;
+            width: 100%;
+            height: auto;
+        }
     }
 
     &__item {
         line-height: 5.5rem;
         height: 100%;
         padding: 0 1.5rem;
+        position: relative;
         @include mixin.respond(tablet) {
             padding: 0 1rem;
+        }
+        @include mixin.respond(phone-landscape) {
+            width: 100%;
+            text-align: center;
+            padding: 1rem 1.5rem;
+
+            &::after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                left: 0;
+                text-align: center;
+                height: 1px;
+                background-color: rgba(255, 255, 255, 0.6);
+            }
         }
 
         &:hover .nav__link {
             color: rgba(255, 255, 255, 1);
             transform: translateY(-1px);
+
+            @include mixin.respond(phone-landscape) {
+                transform: translate(0);
+            }
         }
     }
 
@@ -78,5 +112,75 @@
         display: block;
         height: 100%;
         transition: transform .3s ease;
+
+        @include mixin.respond(phone-landscape) {
+            font-size: 3.2rem;
+            width: 35%;
+            margin: 0 auto;
+            
+        }
+    }
+}
+
+// Hamburger menu
+.hamburger {
+    margin-right: 20px;
+    height: 100%;
+    display: none;
+    background-color: transparent;
+    padding: 0 1.2rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    display: none;
+
+    @include mixin.respond(phone-landscape) {
+        display: inline-block;
+    }
+
+    &__bar-container {
+        display: inline-block;
+        width: 22px;
+        height: 100%;
+        position: relative;
+    }
+
+    &__bar {
+        width: 100%;
+        height: 3px;
+        background-color: var.$color-white;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transition: all 0.2s ease-in;
+
+        &::before,
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var.$color-white;
+            top: -7px;
+        }
+        &::after {
+            top: 7px;
+        }
+
+    }
+}
+
+.nav-active {
+    @include mixin.respond(phone-landscape) {
+    left: 0;
+    height: 100vh;
+    background-color: #051c2d;
+    position: fixed;
+    }
+}
+.header-active {
+    @include mixin.respond(phone-landscape) {
+        position: fixed;
     }
 }

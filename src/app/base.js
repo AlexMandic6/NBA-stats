@@ -11,4 +11,7 @@ export const elements = {
     east: document.querySelector('.tableBody-east'),
     west: document.querySelector('.tableBody-west'),
     newsBtn: document.querySelector('.news'),
+    header: document.querySelector('.header'),
+    nav: document.querySelector('nav'),
+    hamburgerMenu: document.querySelector('.hamburger'),
 }

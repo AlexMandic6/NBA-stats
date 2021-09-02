@@ -1,6 +1,10 @@
 import '../styles/main.scss';
 import { elements } from './base';
 import { fetchConfStandings } from './fetchStandings';
+import { mobileMenu } from './mobileMenu';
+
+elements.hamburgerMenu.addEventListener('click', mobileMenu);
+
 
 const sortConferences = async () => {
     const conf = {};

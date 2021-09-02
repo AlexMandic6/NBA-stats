@@ -9,7 +9,7 @@ module.exports = {
   entry: ['@babel/polyfill', __dirname + '/src/app/index.js'],
   entry: {
     index: './src/app/index.js',
-    teams: './src/app/sortNames.js',
+    teams: './src/app/divisions.js',
     players: './src/app/playersTable.js',
     standings: './src/app/standings.js',
     playerProfile: './src/app/playerProfile.js',

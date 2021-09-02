@@ -1,5 +1,8 @@
 import '../styles/main.scss';
 import { elements } from './base';
+import { mobileMenu } from './mobileMenu';
+
+elements.hamburgerMenu.addEventListener('click', mobileMenu);
 
 elements.newsBtn.addEventListener('click', e => {
     const btn = e.target.closest('button');
