@@ -27,6 +27,10 @@
     margin-bottom: 10rem;
     width: 100%;
     background-color: #051c2d;
+
+    @include mixin.respond(phone-landscape) {
+        margin-bottom: 0;
+    }
 }
 
 .nav {
