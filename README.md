@@ -8,7 +8,7 @@ At this moment app gives you:
 - List of all Players with pagination and search option
 - Dedicated player profile page with player stats and info (when clicked on player name on Players page)
 
-Home page slider to come, only one image for now.
+Home page slider to come, only one image for now. Also dedicated team page comming.
 
 
 Homepage.
