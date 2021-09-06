@@ -15,16 +15,15 @@ const clearDropdown = () => {
 }
 
 
-const getTricode = async (id) => {
-    const data = await fetchTeamColor();
-    const filteredData = data.filter(el => el.teamId === id.teamId);
-    const tricode = filteredData[0].tricode;
-    return tricode;
-} 
+// const getTricode = async (id) => {
+//     const data = await fetchTeamColor();
+//     const filteredData = data.filter(el => el.teamId === id.teamId);
+//     const tricode = filteredData[0].tricode;
+//     return tricode;
+// } 
 
-
-const renderPlayer = async playerData => {
-    const tricode = await getTricode(playerData);
+const renderPlayer = playerData => {
+    // const tricode = await getTricode(playerData);
     const markup = `<tr class="player">
         <td>
             <a class="player__profile" href="player.html#${playerData.personId}">
@@ -38,7 +37,7 @@ const renderPlayer = async playerData => {
             </a>
         </td>
         <td>
-            <a class="player__team" href="#!">${tricode}</a>
+            <a class="player__team" href="#!">tricode</a>
         </td>
         <td>${playerData.jersey}</td>
         <td>${playerData.pos}</td>
@@ -99,12 +98,8 @@ const renderButtons = (page, numOfResults, resPerPage) => {
 
 export const renderResults = (players, page = 1, resPerPage = 50) => {
     const start = (page - 1) * resPerPage;
-    const end = page * resPerPage;
-
-    if(elements.playerSearchBar.value === '') {
-        players.slice(start, end).forEach(renderPlayer);
-    }; 
-
+    const end = page * resPerPage; 
+    players.slice(start, end).forEach(renderPlayer);
     renderButtons(page, players.length, resPerPage,);
 }
 
@@ -152,23 +147,21 @@ elements.pageBtn.addEventListener('click', e => {
     }
 });
 
-elements.playerSearchBar.addEventListener('keyup', e => {
+elements.playerSearchBar.addEventListener('input', e => {
     const searchString = e.target.value.toLowerCase();
     if(searchString.length > 0) {
-        const fetchedPlayers = async () => {
-            const players = await fetchPlayers();
+        fetchPlayers().then(players => {
             const filteredPlayers = players.filter(player => {
                 return player.firstName.toLowerCase().includes(searchString) ||
-                       player.lastName.toLowerCase().includes(searchString)
-                ;
+                player.lastName.toLowerCase().includes(searchString);
             });
             clearResults();
-            filteredPlayers.forEach(player => renderPlayer(player));
+            renderResults(filteredPlayers);
             showNumberOfPlayers(filteredPlayers);
             clearDropdown();
             createDropdown(filteredPlayers.length / 50);
-        }
-        fetchedPlayers();
+
+        });
     } else if(searchString.length === 0) {
         fetchPlayers().then(data => {
             clearResults();
