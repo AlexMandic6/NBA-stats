@@ -1,11 +1,9 @@
 import '../styles/main.scss';
 import { fetchPlayers } from './fetchPlayers';
 import { fetchTeamColor } from './fetchTeamColors';
+import { fetchTeams } from "./fetchTeams";
 import { elements } from './base';
 import { mobileMenu } from './mobileMenu';
-
-elements.hamburgerMenu.addEventListener('click', mobileMenu);
-
 
 const clearResults = () => {
     elements.playerTable.innerHTML = '';
@@ -15,49 +13,63 @@ const clearDropdown = () => {
 }
 
 
-// const getTricode = async (id) => {
-//     const data = await fetchTeamColor();
-//     const filteredData = data.filter(el => el.teamId === id.teamId);
-//     const tricode = filteredData[0].tricode;
-//     return tricode;
-// } 
+const getTricode = async (id) => {
+    const data = await fetchTeams();
+    const filteredData = data.filter(el => el.teamId === id.teamId);
+    const tricode = filteredData[0].tricode;
+    return tricode;
+}
 
-const renderPlayer = playerData => {
-    // const tricode = await getTricode(playerData);
+const renderPlayer = async playerData => { 
+    const tricode = await getTricode(playerData);
+
     const markup = `<tr class="player">
-        <td>
-            <a class="player__profile" href="player.html#${playerData.personId}">
-                <div class="player__img">
-                    <img src="https://cdn.nba.com/headshots/nba/latest/260x190/${playerData.personId}.png" onerror="this.onerror=null;this.src='../img/no-profile-image.jpg';" alt="Player image">
-                </div>
-                <div class="player__name">
-                    <p class="player__name-first">${playerData.firstName}</p>
-                    <p class="player__name-last">${playerData.lastName}</p>
-                </div>
-            </a>
-        </td>
-        <td>
-            <a class="player__team" href="#!">tricode</a>
-        </td>
-        <td>${playerData.jersey}</td>
-        <td>${playerData.pos}</td>
-        <td>${playerData.heightMeters + ' m'}</td>
-        <td>${playerData.weightKilograms + ' kg'}</td>
-        <td>${playerData.country}</td>
+    <td>
+        <a class="player__profile" href="player.html#${playerData.personId}">
+            <div class="player__img">
+                <img src="https://cdn.nba.com/headshots/nba/latest/260x190/${playerData.personId}.png" onerror="this.onerror=null;this.src='../img/no-profile-image.jpg';" alt="Player image">
+            </div>
+            <div class="player__name">
+            <p class="player__name-first">${playerData.firstName}</p>
+            <p class="player__name-last">${playerData.lastName}</p>
+            </div>
+        </a>
+    </td>
+    <td>
+        <a class="player__team" href="#!">${tricode}</a>
+    </td>
+    <td>${playerData.jersey}</td>
+    <td>${playerData.pos}</td>
+    <td>${playerData.heightMeters + ' m'}</td>
+    <td>${playerData.weightKilograms + ' kg'}</td>
+    <td>${playerData.country}</td>
     </tr>`;
-
+        
     elements.playerTable.insertAdjacentHTML('beforeend', markup);
 }
 
-
+const renderResults = (players, page = 1, resPerPage = 50) => {
+    clearResults();
+    if(players.length > resPerPage) {
+        const start = (page - 1) * resPerPage;
+        const end = page * resPerPage;
+        players.slice(start, end).forEach(renderPlayer);
+        controlButtons(page, players.length, resPerPage,);
+    } else {
+        players.forEach(renderPlayer);
+    }
+}
+            
 const createDropdown = (pages) => {
     let option;
-    for(let i = 0; i < pages; i++) {
-        option = `<option value="${i}">${i + 1}</option>`;
-        elements.pageSelect.insertAdjacentHTML('beforeend', option);
+        for(let i = 0; i < pages; i++) {
+            option = `<option value="${i}">${i + 1}</option>`;
+            elements.pageSelect.insertAdjacentHTML('beforeend', option);
+        }
+    if(option) {
+        elements.pageSelect.options[0].setAttribute('selected', '');
+        showNumOfPages(pages);
     }
-    elements.pageSelect.options[0].setAttribute('selected', '');
-    showNumOfPages(pages)
 };
 
 const changeSelectOption = opt => {
@@ -71,7 +83,7 @@ const changeSelectOption = opt => {
 };
 
 
-const renderButtons = (page, numOfResults, resPerPage) => {
+const controlButtons = (page, numOfResults, resPerPage) => {
     const pages = Math.ceil(numOfResults / resPerPage);
     const next = elements.nextBtn;
     const prev = elements.prevBtn;
@@ -83,7 +95,6 @@ const renderButtons = (page, numOfResults, resPerPage) => {
     if (page === 1 && pages > 1) {
         prev.disabled = true;
         prev.classList.add('disabled');
-
     } else if (page > 1 && page < pages) {
         next.disabled = false;
         next.classList.remove('disabled');
@@ -94,14 +105,6 @@ const renderButtons = (page, numOfResults, resPerPage) => {
         next.classList.add('disabled');
     }
 };
-
-
-export const renderResults = (players, page = 1, resPerPage = 50) => {
-    const start = (page - 1) * resPerPage;
-    const end = page * resPerPage; 
-    players.slice(start, end).forEach(renderPlayer);
-    renderButtons(page, players.length, resPerPage,);
-}
 
 const changePageBtns = button => {
     const parentBtn = elements.pageBtn;
@@ -133,8 +136,17 @@ const selectPage = page => {
     });
 };
 
-elements.pageSelect.addEventListener('change', selectPage);
+function showNumberOfPlayers(res) {
+    let numOfPlayers = elements.numOfPlayers;
+    numOfPlayers.innerHTML = res.length + '&nbsp';
+};
 
+function showNumOfPages(numPages) {
+    elements.numOfPages.innerHTML ='&nbsp' + Math.ceil(numPages);
+};
+
+elements.pageSelect.addEventListener('change', selectPage);
+elements.hamburgerMenu.addEventListener('click', mobileMenu);
 
 elements.pageBtn.addEventListener('click', e => {
     const button = e.target.closest('.players__filter-btn');
@@ -147,21 +159,35 @@ elements.pageBtn.addEventListener('click', e => {
     }
 });
 
-elements.playerSearchBar.addEventListener('input', e => {
-    const searchString = e.target.value.toLowerCase();
-    if(searchString.length > 0) {
-        fetchPlayers().then(players => {
-            const filteredPlayers = players.filter(player => {
-                return player.firstName.toLowerCase().includes(searchString) ||
-                player.lastName.toLowerCase().includes(searchString);
-            });
-            clearResults();
-            renderResults(filteredPlayers);
-            showNumberOfPlayers(filteredPlayers);
-            clearDropdown();
-            createDropdown(filteredPlayers.length / 50);
 
-        });
+function debounce(func, timeout = 300){
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+  }
+  
+  let efficientSearch = debounce((e) => {
+      const searchString = e.target.value.toLowerCase();
+      
+      if(searchString.length > 0) {
+          const filteredPlayers = async () => {
+            const players = await fetchPlayers();
+            const filtered = players.filter(el => {
+                return el.firstName.toLowerCase().includes(searchString) ||
+                el.lastName.toLowerCase().includes(searchString);
+            });
+            
+            clearResults();
+            renderResults(filtered);
+            showNumberOfPlayers(filtered);
+            clearDropdown();
+            createDropdown(filtered.length / 50);
+            
+        }
+        filteredPlayers();
+        
     } else if(searchString.length === 0) {
         fetchPlayers().then(data => {
             clearResults();
@@ -169,17 +195,9 @@ elements.playerSearchBar.addEventListener('input', e => {
             showNumberOfPlayers(data);
         })
     }
-});
+  });
 
-function showNumberOfPlayers(res) {
-    let numOfPlayers = elements.numOfPlayers;
-    numOfPlayers.innerHTML = res.length + '&nbsp';
-};
-
-function showNumOfPages(numPages) {
-    elements.numOfPages.innerHTML ='&nbsp' + Math.ceil(numPages);
-};
-
+elements.playerSearchBar.addEventListener('input', efficientSearch);
 
 fetchPlayers().then(data => {
    renderResults(data);
