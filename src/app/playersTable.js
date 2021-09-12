@@ -167,27 +167,25 @@ function debounce(func, timeout = 300){
       timer = setTimeout(() => { func.apply(this, args); }, timeout);
     };
   }
+
+  const filteredPlayers = async (searchText) => {
+    const players = await fetchPlayers();
+    const filtered = players.filter(el => {
+        return el.firstName.toLowerCase().includes(searchText) ||
+        el.lastName.toLowerCase().includes(searchText);
+    });
+    clearResults();
+    renderResults(filtered);
+    showNumberOfPlayers(filtered);
+    clearDropdown();
+    createDropdown(filtered.length / 50);
+}
   
   let efficientSearch = debounce((e) => {
       const searchString = e.target.value.toLowerCase();
       
       if(searchString.length > 0) {
-          const filteredPlayers = async () => {
-            const players = await fetchPlayers();
-            const filtered = players.filter(el => {
-                return el.firstName.toLowerCase().includes(searchString) ||
-                el.lastName.toLowerCase().includes(searchString);
-            });
-            
-            clearResults();
-            renderResults(filtered);
-            showNumberOfPlayers(filtered);
-            clearDropdown();
-            createDropdown(filtered.length / 50);
-            
-        }
-        filteredPlayers();
-        
+        filteredPlayers(searchString);
     } else if(searchString.length === 0) {
         fetchPlayers().then(data => {
             clearResults();
@@ -203,5 +201,3 @@ fetchPlayers().then(data => {
    renderResults(data);
    showNumberOfPlayers(data);
 });
-
-
