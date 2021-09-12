@@ -1,6 +1,6 @@
 import '../styles/main.scss';
 import { fetchTeams } from "./fetchTeams";
-import { elements } from "./base";
+import { elements, renderLoader, clearLoader } from "./base";
 import { mobileMenu } from './mobileMenu';
 
 elements.hamburgerMenu.addEventListener('click', mobileMenu);
@@ -51,6 +51,10 @@ const makeDivisions = async () => {
         division.insertAdjacentHTML('beforeend', markup);
         });
     }
+    clearLoader();
     return allDivisions;
 };
+
+renderLoader(elements.dataContainer);
+
 makeDivisions();

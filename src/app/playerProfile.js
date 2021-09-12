@@ -1,6 +1,6 @@
 import '../styles/main.scss';
 import './fetchPlayers';
-import { elements } from "./base";
+import { elements, renderLoader, clearLoader } from "./base";
 import { fetchPlayers } from './fetchPlayers';
 import { fetchTeams } from './fetchTeams';
 import { fetchTeamColor } from './fetchTeamColors';
@@ -13,6 +13,7 @@ export const controlPlayer = async () => {
     if(id) {
         const player = new Player(id);
         await player.getPlayer();
+        clearLoader();
         renderPlayerProfile(player);
     }
 };
@@ -160,4 +161,6 @@ const renderPlayerProfile = player => {
 </main>`;
     header.insertAdjacentHTML('beforeend', markup);
 };
+
+renderLoader(elements.emptySpace);
 controlPlayer();

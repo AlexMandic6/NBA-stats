@@ -2,7 +2,7 @@ import '../styles/main.scss';
 import { fetchPlayers } from './fetchPlayers';
 import { fetchTeamColor } from './fetchTeamColors';
 import { fetchTeams } from "./fetchTeams";
-import { elements } from './base';
+import { elements, renderLoader, clearLoader } from './base';
 import { mobileMenu } from './mobileMenu';
 
 const clearResults = () => {
@@ -175,6 +175,7 @@ function debounce(func, timeout = 300){
         el.lastName.toLowerCase().includes(searchText);
     });
     clearResults();
+    clearLoader();
     renderResults(filtered);
     showNumberOfPlayers(filtered);
     clearDropdown();
@@ -185,6 +186,7 @@ function debounce(func, timeout = 300){
       const searchString = e.target.value.toLowerCase();
       
       if(searchString.length > 0) {
+        renderLoader(elements.dataContainer);
         filteredPlayers(searchString);
     } else if(searchString.length === 0) {
         fetchPlayers().then(data => {
@@ -197,7 +199,10 @@ function debounce(func, timeout = 300){
 
 elements.playerSearchBar.addEventListener('input', efficientSearch);
 
+renderLoader(elements.dataContainer);
+
 fetchPlayers().then(data => {
+   clearLoader();
    renderResults(data);
    showNumberOfPlayers(data);
 });

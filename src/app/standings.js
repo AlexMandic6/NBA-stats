@@ -1,5 +1,5 @@
 import '../styles/main.scss';
-import { elements } from './base';
+import { elements, renderLoader, clearLoader } from './base';
 import { fetchConfStandings } from './fetchStandings';
 import { mobileMenu } from './mobileMenu';
 
@@ -43,8 +43,11 @@ const makeConferences = async (side) => {
     }); 
 };
 
+renderLoader(elements.dataContainer);
+
 const renderConferences = async () => {
     const allConfs = await sortConferences();
+    clearLoader();
     for(let prop in allConfs) {
         makeConferences(prop);
     }

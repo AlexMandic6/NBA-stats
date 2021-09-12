@@ -32,3 +32,22 @@ linear-gradient(270deg,#000 3%,transparent 25%);
         background-color: white !important;
     }
 }
+
+
+.loader {
+    margin: 5rem auto;
+    text-align: center; 
+    & svg {
+      height: 5.5rem;
+      width: 5.5rem;
+      fill: #bebebe;
+      transform-origin: 44% 50%;
+      animation: rotate 1.5s infinite linear; 
+    }
+}
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0); }
+    100% {
+      transform: rotate(360deg); } }
